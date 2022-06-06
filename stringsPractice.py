@@ -1,6 +1,7 @@
 #Maria Isabel
 #We are going tV learn abt Strings   '' or ""
 import os
+import random
 os.system('cls')
 print('Hi')
 print("Hi")
@@ -24,5 +25,5 @@ else:
     message=message.upper()
     print(message)
 print(type(message))
-print(help(message)) #list  all methods in string
-
+print(help(message.index)) #list  all methods in string
+print(help(random.randint))
