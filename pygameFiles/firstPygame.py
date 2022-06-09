@@ -8,6 +8,8 @@ pygame.init()#initialize the pygame package
 os.system('cls')
 WIDTH=700 #like constant
 HEIGHT=700
+colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255)}
+clr=colors.get("white")
 #create dispay wind with any name y like
 screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
 pygame.display.set_caption("My First Game")  #change the title of my window
@@ -26,7 +28,7 @@ xb=100
 yb=300
 square=(xb,yb,wb,hb)# create the object to draw
 #keep running create a lp
-backgrnd=greenClr
+backgrnd=clr
 run = True
 while run:
     screen.fill(backgrnd)
