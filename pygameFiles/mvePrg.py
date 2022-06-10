@@ -11,7 +11,7 @@
 #picture = pygame. transform. scale(picture, (1280, 720))
 #bg=pygame.image.load('ClassStuff\CircleEatsSquare\Images\\bgSmaller.jpg')
 
-import pygame, time,os
+import pygame, time,os,random
 pygame.init()#initialize the pygame package
 os.system('cls')
 WIDTH=700 #like constant
@@ -27,6 +27,7 @@ wb=50
 xb=100
 yb=300
 square=pygame.Rect(xb,yb,wb,hb)# create the object to draw
+insSquare=pygame.Rect(
 squareClr=colors.get("pink")
 #keep running create a lp
 circleClr=colors.get("blue")
@@ -44,6 +45,7 @@ while run:
             run=False
             print("Y quit")
     keys= pygame.key.get_pressed() #this is a list
+    #mve square
     if keys[pygame.K_RIGHT] and square.x < WIDTH -(wb):
         square.x += speed
     if keys[pygame.K_LEFT] and  square.x > speed:
@@ -52,7 +54,20 @@ while run:
         square.y -= speed
     if keys[pygame.K_DOWN] and square.y <HEIGHT -hb:  #means clser t max value HEIGHT
         square.y += speed
-    
+        #mve Circle
+    if keys[pygame.K_d] and cx < WIDTH -(rad):
+        cx += speed
+    if keys[pygame.K_a] and  cx > (speed+rad):
+        cx -= speed
+    if keys[pygame.K_w] and cy >(speed+rad):   #means clser t 0
+        cy -= speed
+    if keys[pygame.K_s] and cy <HEIGHT -(rad):  #means clser t max value HEIGHT
+        cy += speed
+    if square.collidepoint(cx,cy):
+        print("BOOM")
+        cx=random.randint(rad, WIDTH-rad)
+        cy=random.randint(rad, HEIGHT-rad)
+        rad+=5
     #rect(surface, color, rect) -> Rect
     pygame.draw.rect(screen, squareClr,square)
     #circle(surface, color, center, radius)
