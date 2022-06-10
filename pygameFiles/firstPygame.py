@@ -26,7 +26,7 @@ hb=50
 wb=50
 xb=100
 yb=300
-square=(xb,yb,wb,hb)# create the object to draw
+square=pygame.Rect(xb,yb,wb,hb)# create the object to draw
 #keep running create a lp
 backgrnd=clr
 run = True

@@ -11,7 +11,7 @@
 #picture = pygame. transform. scale(picture, (1280, 720))
 #bg=pygame.image.load('ClassStuff\CircleEatsSquare\Images\\bgSmaller.jpg')
 
-import pygame, time,os,random
+import pygame, time,os,random, math
 pygame.init()#initialize the pygame package
 os.system('cls')
 WIDTH=700 #like constant
@@ -26,8 +26,14 @@ hb=50
 wb=50
 xb=100
 yb=300
+cx=350
+cy=350
+rad=25
+ibox=rad*math.sqrt(2)
+xig= cx-(ibox/2)
+yig= cy-(ibox/2)
 square=pygame.Rect(xb,yb,wb,hb)# create the object to draw
-insSquare=pygame.Rect(
+insSquare=pygame.Rect(xig,yig,ibox,ibox)
 squareClr=colors.get("pink")
 #keep running create a lp
 circleClr=colors.get("blue")
@@ -35,9 +41,7 @@ backgrnd=colors.get("limeGreen")
 run = True
 #create var mve
 speed=2
-cx=350
-cy=350
-rad=25
+
 while run:
     screen.fill(backgrnd)
     for event in pygame.event.get():
