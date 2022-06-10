@@ -10,9 +10,8 @@
 # K_d                   right square
 # K_w                   up square
 # K_s                   down square
-from email.utils import encode_rfc2231
+
 import random
-from turtle import back
 import pygame, time,os, math
 clock=pygame.time.Clock()    #optimizing the speed of the game  look at last statement
 
