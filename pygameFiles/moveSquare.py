@@ -19,7 +19,7 @@ clock=pygame.time.Clock()    #optimizing the speed of the game  look at last sta
 os.system('cls')
 WIDTH=900 #like constant
 HEIGHT=600
-colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(153,255,51),"purple":(127,0,255)}
+colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(153,255,51),"purple":(255,0,255)}
 clr=colors.get("limeGreen")
 #create dispay wind with any name y like
 screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
