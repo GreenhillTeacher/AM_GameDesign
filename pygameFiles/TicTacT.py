@@ -1,36 +1,89 @@
-#Maria  Suarez
-#TicTacT game
+#MAria   
+# TICTACTOE  
+# zero_Array() 
+# draw_grid() 
+# draw_markers() 
+# checkWinner() 
+# Game_end()
 
-# functs:  
-# draw_grid()
-# zer_grid()
-# draw_marker()
-# check_winner()  
-# game_end()
-
-from tkinter import Widget
-from numpy import deprecate_with_doc
-import pygame, time,os,random, math, sys,datetime
-pygame.init()#initialize the pygame package
-
+import os, random, time, pygame, math, datetime,sys
 os.system('cls')
-WIDTH=600 #like constant
-HEIGHT=600
-TITLE_FONT = pygame.font.SysFont('comicsans', WIDTH//20)
-MENU_FONT = pygame.font.SysFont('comicsans', WIDTH//25)
-screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
-pygame.display.set_caption("My First Game")  #change the title of my window
 
-#Define Lists and Dict
+pygame.init()
+
+TITLE_FONT = pygame.font.SysFont('comicsans', 40)
+MENU_FONT = pygame.font.SysFont('comicsans', 20)
+
+WIDTH=700 #like constant
+HEIGHT=700
 colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(153,255,51),
 "RED" : (255, 0, 0),
 "GREEN" : (0, 255, 0),
 "BLUE" : (0, 0,255),
 # SHADES,
 "BLACK" : (0, 0, 0),
-
+"DARK_GREY" : (60, 60, 60),
+"DARK_SLATE_GREY" : (47, 79, 79),
 "DIM_GREY" : (105, 105, 105),
 "FREE_SPEECH_GREY" : (99, 86, 136),
+"GREY" : (190, 190, 190),
+"GREY0" : (0, 0, 0),
+"GREY1" : (3, 3, 3),
+"GREY2" : (5, 5, 5),
+"GREY3" : (8, 8, 8),
+"GREY4" : (10, 10, 10),
+"GREY5" : (13, 13, 13),
+"GREY6" : (15, 15, 15),
+"GREY7" : (18, 18, 18),
+"GREY8" : (20, 20, 20),
+"GREY9" : (23, 23, 23),
+"GREY10" : (26, 26, 26),
+"GREY11" : (28, 28, 28),
+"GREY12" : (31, 31, 31),
+"GREY13" : (33, 33, 33),
+"GREY14" : (36, 36, 36),
+"GREY15" : (38, 38, 38),
+"GREY16" : (41, 41, 41),
+"GREY17" : (43, 43, 43),
+"GREY18" : (46, 46, 46),
+"GREY19" : (48, 48, 48),
+"GREY20" : (51, 51, 51),
+"GREY21" : (54, 54, 54),
+"GREY22" : (56, 56, 56),
+"GREY23" : (59, 59, 59),
+"GREY24" : (61, 61, 61),
+"GREY25" : (64, 64, 64),
+"GREY26" : (66, 66, 66),
+"GREY27" : (69, 69, 69),
+"GREY28" : (71, 71, 71),
+"GREY29" : (74, 74, 74),
+"GREY30" : (77, 77, 77),
+"GREY31" : (79, 79, 79),
+"GREY32" : (82, 82, 82),
+"GREY33" : (84, 84, 84),
+"GREY34" : (87, 87, 87),
+"GREY35" : (89, 89, 89),
+"GREY36" : (92, 92, 92),
+"GREY37" : (94, 94, 94),
+"GREY38" : (97, 97, 97),
+"GREY39" : (99, 99, 99),
+"GREY40" : (102, 102, 102),
+"GREY41" : (105, 105, 105),
+"GREY42" : (107, 107, 107),
+"GREY43" : (110, 110, 110),
+"GREY44" : (112, 112, 112),
+"GREY45" : (115, 115, 115),
+"GREY46" : (117, 117, 117),
+"GREY47" : (120, 120, 120),
+"GREY48" : (122, 122, 122),
+"GREY49" : (125, 125, 125),
+"GREY50" : (127, 127, 127),
+"GREY51" : (130, 130, 130),
+"GREY52" : (133, 133, 133),
+"GREY53" : (135, 135, 135),
+"GREY54" : (138, 138, 138),
+"GREY55" : (140, 140, 140),
+"GREY56" : (143, 143, 143),
 "GREY57" : (145, 145, 145),
 "GREY58" : (148, 148, 148),
 "GREY59" : (150, 150, 150),
@@ -82,6 +135,8 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "SLATE_GREY_4" : (108, 123, 139),
 "VERY_LIGHT_GREY" : (205, 205, 205),
 "WHITE" : (255, 255,255),
+ 
+ 
 "ALICE_BLUE" : (240, 248, 255),
 "AQUA" : (0, 255, 255),
 "AQUAMARINE" : (127, 255, 212),
@@ -94,25 +149,34 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "AZURE_2" : (224, 238, 238),
 "AZURE_3" : (193, 205, 205),
 "AZURE_4" : (131, 139, 139),
+"BLUE_1" : (0, 0, 255),
+"BLUE_2" : (0, 0, 238),
+"BLUE_3" : (0, 0, 205),
+"BLUE_4" : (0, 0, 139),
 "BLUE_VIOLET" : (138, 43, 226),
 "CADET_BLUE" : (95, 159, 159),
 "CADET_BLUE_1" : (1152, 245, 255),
 "CADET_BLUE_2" : (142, 229, 238),
 "CADET_BLUE_3" : (122, 197, 205),
-# "CYAN" : (0, 255, 255),
-# "CYAN_1" : (0, 255, 255),
-# "CYAN_2" : (0, 238, 238),
-# "CYAN_3" : (0, 205, 205),
-# "CYAN_4" : (0, 139, 139),
-# "DEEP_SKY_BLUE_1" : (0, 191, 255),
-# "DEEP_SKY_BLUE_2" : (0, 178, 238),
-# "DEEP_SKY_BLUE_3" : (0, 154, 205),
-# "DEEP_SKY_BLUE_4" : (0, 104, 139),
-# "DODGER_BLUE" : (30, 144, 255),
-# "DODGER_BLUE_1" : (30, 144, 255),
-# "DODGER_BLUE_2" : (28, 134, 238),
-# "DODGER_BLUE_3" : (24, 116, 205),
-# "DODGER_BLUE_4" : (16, 78, 139),
+"CADET_BLUE_4" : (83, 134, 139),
+"CORN_FLOWER_BLUE" : (66, 66, 111),
+"CYAN" : (0, 255, 255),
+"CYAN_1" : (0, 255, 255),
+"CYAN_2" : (0, 238, 238),
+"CYAN_3" : (0, 205, 205),
+"CYAN_4" : (0, 139, 139),
+"DARK_SLATE_BLUE" : (36, 24, 130),
+"DARK_TURQUOISE" : (112, 147, 219),
+"DEEP_SKY_BLUE" : (0, 191, 255),
+"DEEP_SKY_BLUE_1" : (0, 191, 255),
+"DEEP_SKY_BLUE_2" : (0, 178, 238),
+"DEEP_SKY_BLUE_3" : (0, 154, 205),
+"DEEP_SKY_BLUE_4" : (0, 104, 139),
+"DODGER_BLUE" : (30, 144, 255),
+"DODGER_BLUE_1" : (30, 144, 255),
+"DODGER_BLUE_2" : (28, 134, 238),
+"DODGER_BLUE_3" : (24, 116, 205),
+"DODGER_BLUE_4" : (16, 78, 139),
 "FREE_SPEECH_BLUE" : (65, 86, 197),
 "LIGHT_BLUE" : (173, 216, 230),
 "LIGHT_BLUE_1" : (191, 239, 255),
@@ -181,26 +245,26 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "TURQUOISE_4" : (0, 134,139),
  
  
-# "BAKERS_CHOCOLATE" : (92, 51, 23),
-# "BEIGE" : (245, 245, 220),
-# "BROWN" : (166, 42, 42),
-# "BROWN_1" : (255, 64, 64),
-# "BROWN_2" : (238, 59, 59),
-# "BROWN_3" : (205, 51, 51),
-# "BROWN_4" : (139, 35, 35),
-# "BURLYWOOD" : (222, 184, 135),
-# "BURLYWOOD_1" : (255, 211, 155),
-# "BURLYWOOD_2" : (238, 197, 145),
-# "BURLYWOOD_3" : (205, 170, 125),
-# "BURLYWOOD_4" : (139, 115, 85),
-# "CHOCOLATE" : (210, 105, 30),
-# "CHOCOLATE_1" : (255, 127, 36),
-# "CHOCOLATE_2" : (238, 118, 33),
-# "CHOCOLATE_3" : (205, 102, 29),
-# "CHOCOLATE_4" : (139, 69, 19),
-# "DARK_BROWN" : (92, 64, 51),
-# "DARK_TAN" : (151, 105, 79),
-# "DARK_WOOD" : (133, 94, 66),
+"BAKERS_CHOCOLATE" : (92, 51, 23),
+"BEIGE" : (245, 245, 220),
+"BROWN" : (166, 42, 42),
+"BROWN_1" : (255, 64, 64),
+"BROWN_2" : (238, 59, 59),
+"BROWN_3" : (205, 51, 51),
+"BROWN_4" : (139, 35, 35),
+"BURLYWOOD" : (222, 184, 135),
+"BURLYWOOD_1" : (255, 211, 155),
+"BURLYWOOD_2" : (238, 197, 145),
+"BURLYWOOD_3" : (205, 170, 125),
+"BURLYWOOD_4" : (139, 115, 85),
+"CHOCOLATE" : (210, 105, 30),
+"CHOCOLATE_1" : (255, 127, 36),
+"CHOCOLATE_2" : (238, 118, 33),
+"CHOCOLATE_3" : (205, 102, 29),
+"CHOCOLATE_4" : (139, 69, 19),
+"DARK_BROWN" : (92, 64, 51),
+"DARK_TAN" : (151, 105, 79),
+"DARK_WOOD" : (133, 94, 66),
 "LIGHT_WOOD" : (133, 99, 99),
 "MEDIUM_WOOD" : (166, 128, 100),
 "NEW_TAN" : (235, 199, 158),
@@ -226,19 +290,19 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "CHARTREUSE_2" : (118, 238, 0),
 "CHARTREUSE_3" : (102, 205, 0),
 "CHARTREUSE_4" : (69, 139, 0),
-# "DARK_GREEN" : (47, 79, 47),
-# "DARK_GREEN_COPPER" : (74, 118, 110),
-# "DARK_KHAKI" : (189, 183, 107),
-# "DARK_OLIVE_GREEN" : (85, 107, 47),
-# "DARK_OLIVE_GREEN_1" : (202, 255, 112),
-# "DARK_OLIVE_GREEN_2" : (188, 238, 104),
-# "DARK_OLIVE_GREEN_3" : (162, 205, 90),
-# "DARK_OLIVE_GREEN_4" : (110, 139, 61),
-# "DARK_SEA_GREEN" : (143, 188, 143),
-# "DARK_SEA_GREEN_1" : (193, 255, 193),
-# "DARK_SEA_GREEN_2" : (180, 238, 180),
-# "DARK_SEA_GREEN_3" : (155, 205, 155),
-# "DARK_SEA_GREEN_4" : (105, 139, 105),
+"DARK_GREEN" : (47, 79, 47),
+"DARK_GREEN_COPPER" : (74, 118, 110),
+"DARK_KHAKI" : (189, 183, 107),
+"DARK_OLIVE_GREEN" : (85, 107, 47),
+"DARK_OLIVE_GREEN_1" : (202, 255, 112),
+"DARK_OLIVE_GREEN_2" : (188, 238, 104),
+"DARK_OLIVE_GREEN_3" : (162, 205, 90),
+"DARK_OLIVE_GREEN_4" : (110, 139, 61),
+"DARK_SEA_GREEN" : (143, 188, 143),
+"DARK_SEA_GREEN_1" : (193, 255, 193),
+"DARK_SEA_GREEN_2" : (180, 238, 180),
+"DARK_SEA_GREEN_3" : (155, 205, 155),
+"DARK_SEA_GREEN_4" : (105, 139, 105),
 "FOREST_GREEN" : (34, 139, 34),
 "FREE_SPEECH_GREEN" : (9, 249, 17),
 "GREEN_1" : (0, 255, 0),
@@ -257,16 +321,16 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "MEDIUM_SEA_GREEN" : (60, 179, 113),
 "MEDIUM_SPRING_GREEN" : (0, 250, 154),
 "MINT_CREAM" : (245, 255, 250),
-# "OLIVE" : (128, 128, 0),
-# "OLIVE_DRAB" : (107, 142, 35),
-# "OLIVE_DRAB_1" : (192, 255, 62),
-# "OLIVE_DRAB_2" : (179, 238, 58),
-# "OLIVE_DRAB_3" : (154, 205, 50),
-# "OLIVE_DRAB_4" : (105, 139, 34),
-# "PALE_GREEN" : (152, 251, 152),
-# "PALE_GREEN_1" : (154, 255, 154),
-# "PALE_GREEN_2" : (144, 238, 144),
-# "PALE_GREEN_3" : (124, 205, 124),
+"OLIVE" : (128, 128, 0),
+"OLIVE_DRAB" : (107, 142, 35),
+"OLIVE_DRAB_1" : (192, 255, 62),
+"OLIVE_DRAB_2" : (179, 238, 58),
+"OLIVE_DRAB_3" : (154, 205, 50),
+"OLIVE_DRAB_4" : (105, 139, 34),
+"PALE_GREEN" : (152, 251, 152),
+"PALE_GREEN_1" : (154, 255, 154),
+"PALE_GREEN_2" : (144, 238, 144),
+"PALE_GREEN_3" : (124, 205, 124),
 "PALE_GREEN_4" : (84, 139, 84),
 "SEA_GREEN" : (46, 139, 87),
 "SEA_GREEN_1" : (84, 255, 159),
@@ -536,74 +600,82 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "WHEAT_4" : (139, 126, 102),
 "QUARTZ" : (217, 217, 243),
 }
+clr=colors.get("limeGreen")
+messageMenu=['Instructions', 'Settings', 'Game 1', 'Game 2', 'Scoreboard', 'Exit']
+messageSettings=["Background Colors", "Screen Size", "Sound On/Off"]
+mainTitle="Circle eats Square Menu"
+#create dispay wind with any name y like
+screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
+pygame.display.set_caption("Tic Tac Te")  #change the title of my window
+backgrnd=colors.get("pink")
 
-SIZE=3
-markers=[]
-MxMy=(0,0)
-lineWidth=10
-cellx=0
-celly=0
+#game Variable
 player=1
-cirClr=colors.get("limeGreen")
-xClr=colors.get("blue")
-bgClr=colors.get("PALE_TURQUOISE_4")
-def zer_grid():
-    for x in range(SIZE):
-        row=[0]*SIZE  #this will create 3 zeros
+markers=[]
+lineWidth=10
+Game=True
+MxMy=(0,0)
+print(markers)  
+cirClr=colors.get("blue")
+xClr=colors.get("BLACK")
+def zero_Array(): 
+    for x in range(3):
+        row= [0] *3
         markers.append(row)
-        
-# zer_grid()
-# print(markers)
-# markers[1][1]=-1  #first index is row sec is col
-# print(markers)
-# print(markers[1][1])
-def draw_Grid():
-    
-    lineClr=colors.get("pink")
-    for x in range(1,SIZE):
-        pygame.draw.line(screen, lineClr,(0,HEIGHT//SIZE*x),(WIDTH,HEIGHT//SIZE*x), lineWidth)#Hztal line
-        pygame.draw.line(screen, lineClr,(WIDTH//SIZE*x,0),(WIDTH//SIZE*x, HEIGHT), lineWidth)   #verrt line
-        pygame.display.update()
-        
-    
+
+
+def draw_grid():
+    lineClr=colors.get("white")
+    for x in range(1,3):
+        pygame.draw.line(screen,lineClr,(0,HEIGHT//3*x),(WIDTH,HEIGHT//3*x),lineWidth)  #Hztal line
+        pygame.draw.line(screen,lineClr,(WIDTH//3*x, 0),(WIDTH//3*x,HEIGHT),lineWidth)  #Vert line
+    pygame.time.delay(100)
+
 def draw_Markers():
     xValue=0
-    for x in markers:  #give me each row  the list
+    for x in markers:   # getting a rw
         yValue=0
-        for y in x:   #each elem  the rw
-            if y==1:
-                print(y)
-                #pygame.draw.line(screen,xClr,(xValue*WIDTH//3+15,yValue*HEIGHT//3 +15),(xValue*WIDTH//3+WIDTH//3-15,yValue*HEIGHT-15),lineWidth)
+        for y in x:  #each elem fthe rw
+            if y ==1:
+                print ("x")
+                pygame.draw.line(screen,xClr,(xValue * WIDTH//3 + 15, yValue * HEIGHT//3 + 15), (xValue * WIDTH//3 + WIDTH//3-15, yValue * WIDTH//3 + WIDTH//3-15),lineWidth)
+                pygame.draw.line(screen, xClr,(xValue*WIDTH//3 +WIDTH//3-15, yValue*HEIGHT//3+15),(xValue *WIDTH//3+15,yValue*HEIGHT//3+HEIGHT//3-15),lineWidth)
             if y==-1:
-                #draw O
-                pygame.draw.circle(screen,cirClr, (xValue*WIDTH//3+WIDTH//6,yValue*HEIGHT//3 +HEIGHT//6), WIDTH//6-25, lineWidth)
-            yValue+=1
-        xValue+=1
-def check_end():#Check winner
-    print(markers[0][0])
-
-zer_grid()
-Game=True
+                print("O")
+                pygame.draw.circle(screen,cirClr,(xValue*WIDTH//3+WIDTH//6,yValue*HEIGHT//3 +HEIGHT//6),WIDTH//6-15, lineWidth)
+            yValue +=1
+        xValue +=1
+    pygame.display.update() 
+def checkWinner():
+    print()
+    # add all ROWS if markers[0][]+markers[0][]+markers[0][]==3 Or markers[1][]+markers[1][]+markers[1][]==3 OR
+    #winner =1
+    
+def gameEnd():
+    print()
+zero_Array()
 while Game:
-    screen.fill(bgClr) 
-    draw_Grid()
+    screen.fill(backgrnd)
+    draw_grid()
     draw_Markers()
-
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
-            #Menu(titleMain,messageMenu,True)
+            #Menu(mainTitle,messageMenu)
             pygame.quit()
             sys.exit()
+            print("You quit")
         if event.type == pygame.MOUSEBUTTONDOWN:
-            MxMy= pygame.mouse.get_pos()
-            cellx=MxMy[0]//(WIDTH//SIZE)
-            celly=MxMy[1]//(HEIGHT//SIZE)
-            print(markers)
+            MxMy = pygame.mouse.get_pos()
+            cellx=MxMy[0]//(WIDTH//3)
+            celly=MxMy[1]//(HEIGHT//3)
+            print(cellx, celly)
             if markers[cellx][celly]==0:
                 markers[cellx][celly]=player
                 player *=-1
-                check_end()
-    pygame.time.delay(50)
-    pygame.display.update()
-
+                checkWinner()
+            
+            
+            
+    pygame.display.update() 
+    pygame.time.delay(100)
 
