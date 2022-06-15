@@ -22,12 +22,14 @@ pygame.init()#initialize the pygame package
 # MENU_FONT = pygame.font.SysFont('comicsans', 22)
 
 os.system('cls')
-WIDTH=600 #like constant
+WIDTH=900 #like constant
 HEIGHT=600
 TITLE_FONT = pygame.font.SysFont('comicsans', WIDTH//20)
 MENU_FONT = pygame.font.SysFont('comicsans', WIDTH//25)
+screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
+pygame.display.set_caption("My First Game")  #change the title of my window
 
-
+#Define Lists and Dict
 colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(153,255,51),
 "RED" : (255, 0, 0),
 "GREEN" : (0, 255, 0),
@@ -618,8 +620,7 @@ messageMenu=['Instructions', 'Settings', 'Game 1', 'Game 2', 'Scoreboard', 'Exit
 messageSettings=["Background Colors", "Screen Size", "Sound On/Off"]
 titleMain="Circle eats Square Menu"
 #create dispay wind with any name y like
-screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
-pygame.display.set_caption("My First Game")  #change the title of my window
+
 
 #boxes for menu
 Bx=WIDTH//3
