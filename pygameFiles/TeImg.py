@@ -90,14 +90,14 @@ def draw_markers():
 		y_pos = 0
 		for y in x:
 			if y == 1:
-				screen.blit(X_Img,(x_pos * WIDTH//3+5 , y_pos * WIDTH//3+5 ))
+				# screen.blit(X_Img,(x_pos * WIDTH//3+5 , y_pos * WIDTH//3+5 ))
 				pygame.draw.line(screen, xClr, (x_pos * WIDTH//3 + 15, y_pos * WIDTH//3 + 15), (x_pos * WIDTH//3 + WIDTH//3-15, y_pos * WIDTH//3 + WIDTH//3-15), line_width)
 				pygame.draw.line(screen, xClr, (x_pos * WIDTH//3 + WIDTH//3-15, y_pos * WIDTH//3 + 15), (x_pos * WIDTH//3 + 15, y_pos * WIDTH//3 + WIDTH//3-15), line_width)
-            if y == -1:
+			if y == -1:
                 #screen.blit(O_Img,(x_pos * WIDTH//3+5 , y_pos * WIDTH//3+5))
-            	pygame.draw.circle(screen, Oclr, (x_pos * WIDTH//3 + WIDTH//6, y_pos * WIDTH//3 + WIDTH//6), WIDTH//6-25, line_width)
-            y_pos += 1
-        x_pos += 1	
+				pygame.draw.circle(screen, Oclr, (x_pos * WIDTH//3 + WIDTH//6, y_pos * WIDTH//3 + WIDTH//6), WIDTH//6-25, line_width)
+			y_pos += 1
+		x_pos += 1	
 
 
 def check_game_over():
@@ -158,7 +158,7 @@ def draw_game_over(winner):
     again_img = INFO_FONT.render(again_text, True, colors.get("blue"))
     pygame.draw.rect(screen, green, again_rect)
     screen.blit(again_img, (WIDTH // 2 - 80, HEIGHT // 2 + 10))
-instr()
+#instr()
 
 #main loop
 run = True
@@ -189,10 +189,7 @@ while run:
 	if game_over == True:
 		draw_game_over(winner)
 		#check for mouseclick to see if we clicked on Play Again
-		if event.type == pygame.MOUSEBUTTONDOWN and clicked == False:
-			clicked = True
-		if event.type == pygame.MOUSEBUTTONUP and clicked == True:
-			clicked = False
+		if event.type == pygame.MOUSEBUTTONDOWN:
 			pos = pygame.mouse.get_pos()
 			if again_rect.collidepoint(pos):
 				#reset variables
