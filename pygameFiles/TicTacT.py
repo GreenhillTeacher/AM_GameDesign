@@ -610,14 +610,18 @@ pygame.display.set_caption("Tic Tac Te")  #change the title of my window
 backgrnd=colors.get("pink")
 
 #game Variable
-player=1
-markers=[]
-lineWidth=10
-Game=True
-MxMy=(0,0)
+player=1        #Change players 1 and -1
+gameOver=False  #check is game is Over
+winner=0        #save winner either 1 OR -1 ZERO means tie
+markers=[]      #CONTROL cells
+lineWidth=10    #thickness  drawing
+Game=True       #CONTROL game
+MxMy=(0,0)      #Clicks
 print(markers)  
-cirClr=colors.get("blue")
-xClr=colors.get("BLACK")
+cirClr=colors.get("blue")     #circle COLOR
+xClr=colors.get("BLACK")      #X COLOR
+
+#FunctiOn TO ZERO OUR ARRAY
 def zero_Array(): 
     for x in range(3):
         row= [0] *3
@@ -637,22 +641,61 @@ def draw_Markers():
         yValue=0
         for y in x:  #each elem fthe rw
             if y ==1:
-                print ("x")
+                
                 pygame.draw.line(screen,xClr,(xValue * WIDTH//3 + 15, yValue * HEIGHT//3 + 15), (xValue * WIDTH//3 + WIDTH//3-15, yValue * WIDTH//3 + WIDTH//3-15),lineWidth)
                 pygame.draw.line(screen, xClr,(xValue*WIDTH//3 +WIDTH//3-15, yValue*HEIGHT//3+15),(xValue *WIDTH//3+15,yValue*HEIGHT//3+HEIGHT//3-15),lineWidth)
             if y==-1:
-                print("O")
+                
                 pygame.draw.circle(screen,cirClr,(xValue*WIDTH//3+WIDTH//6,yValue*HEIGHT//3 +HEIGHT//6),WIDTH//6-15, lineWidth)
             yValue +=1
         xValue +=1
     pygame.display.update() 
 def checkWinner():
-    print()
-    # add all ROWS if markers[0][]+markers[0][]+markers[0][]==3 Or markers[1][]+markers[1][]+markers[1][]==3 OR
-    #winner =1
+    global gameOver,winner
+    x_pOs=0
+    for x in markers:
+        #check COL
+        if sum(x) ==3:
+            print("sum")
+            winner = 1
+            gameOver=True
+        if sum(x) ==-3:
+            winner = -1
+            gameOver=True
+        #Check ROWS
+        if markers[0][x_pOs] +markers[1][x_pOs]+markers[2][x_pOs] == 3:
+            winner = 1
+            gameOver=True
+
+        if markers[0][x_pOs] +markers[1][x_pOs]+markers[2][x_pOs] == -3:
+            winner = -1
+            gameOver=True
+        x_pOs +=1
+    # #Check DiagOnals 
+    if markers[0][0]+markers[1][1]+markers[2][2] == 3 or markers[2][0]+markers[1][1]+markers[0][2] == 3:
+        winner = 1
+        gameOver=True
+    if markers[0][0]+markers[1][1]+markers[2][2] == -3 or markers[2][0]+markers[1][1]+markers[0][2] == -3:
+        winner = -1
+        gameOver=True
+    #Check FOR a tie
+    if gameOver ==False:
+        tie=True
+        for ROW in markers:
+            for COL in ROW:
+                if COL ==0:
+                    tie=False
+        #LEts make winner =0 if it is tie
+        if tie:   #in a bOOlean variable dOnt need ==  if tie == True
+            gameOver=True
+            winner=0
+
+
     
 def gameEnd():
-    print()
+    global Game
+    print("Dy play again and keep sce")
+    zero_Array()
 zero_Array()
 while Game:
     screen.fill(backgrnd)
@@ -663,16 +706,19 @@ while Game:
             #Menu(mainTitle,messageMenu)
             pygame.quit()
             sys.exit()
-            print("You quit")
+            
         if event.type == pygame.MOUSEBUTTONDOWN:
             MxMy = pygame.mouse.get_pos()
             cellx=MxMy[0]//(WIDTH//3)
             celly=MxMy[1]//(HEIGHT//3)
-            print(cellx, celly)
+            # print(cellx, celly)
             if markers[cellx][celly]==0:
                 markers[cellx][celly]=player
                 player *=-1
                 checkWinner()
+                print(winner)
+                if gameOver:
+                    gameEnd()
             
             
             
