@@ -1,44 +1,85 @@
-#Maria Suarez
-#6/13/2022
-#We are learning pygame basic functins, 
-# creating screens, clrs, shape ,move 
-# move  the square
-# K_UP                  up arrow
-# K_DOWN                down arrow
-# K_RIGHT               right arrow
-# K_LEFT                left arrow
-#picture = pygame. image. load(filename)
-#picture = pygame. transform. scale(picture, (1280, 720))
-#bg=pygame.image.load('ClassStuff\CircleEatsSquare\Images\\bgSmaller.jpg')
+# Sydney Chien
+# TICTACTOE
 
-#CREATING A MENU
 
-import pygame, time,os,random, math, sys,datetime
-pygame.init()#initialize the pygame package
-
-# print(pygame.font.get_fonts())
-# pygame.time.delay(10000)
-# TITLE_FONT = pygame.font.SysFont('comicsans', 40)
-# MENU_FONT = pygame.font.SysFont('comicsans', 22)
-
+import os, random, time, pygame, math, datetime,sys
 os.system('cls')
-WIDTH=900 #like constant
-HEIGHT=600
-TITLE_FONT = pygame.font.SysFont('comicsans', WIDTH//20)
-MENU_FONT = pygame.font.SysFont('comicsans', WIDTH//25)
-screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
-pygame.display.set_caption("My First Game")  #change the title of my window
 
-#Define Lists and Dict
+pygame.init()
+
+TITLE_FONT = pygame.font.SysFont('comicsans', 40)
+MENU_FONT = pygame.font.SysFont('comicsans', 20)
+
+WIDTH=700 #like constant
+HEIGHT=700
 colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(153,255,51),
 "RED" : (255, 0, 0),
 "GREEN" : (0, 255, 0),
 "BLUE" : (0, 0,255),
 # SHADES,
 "BLACK" : (0, 0, 0),
-
+"DARK_GREY" : (60, 60, 60),
+"DARK_SLATE_GREY" : (47, 79, 79),
 "DIM_GREY" : (105, 105, 105),
 "FREE_SPEECH_GREY" : (99, 86, 136),
+"GREY" : (190, 190, 190),
+"GREY0" : (0, 0, 0),
+"GREY1" : (3, 3, 3),
+"GREY2" : (5, 5, 5),
+"GREY3" : (8, 8, 8),
+"GREY4" : (10, 10, 10),
+"GREY5" : (13, 13, 13),
+"GREY6" : (15, 15, 15),
+"GREY7" : (18, 18, 18),
+"GREY8" : (20, 20, 20),
+"GREY9" : (23, 23, 23),
+"GREY10" : (26, 26, 26),
+"GREY11" : (28, 28, 28),
+"GREY12" : (31, 31, 31),
+"GREY13" : (33, 33, 33),
+"GREY14" : (36, 36, 36),
+"GREY15" : (38, 38, 38),
+"GREY16" : (41, 41, 41),
+"GREY17" : (43, 43, 43),
+"GREY18" : (46, 46, 46),
+"GREY19" : (48, 48, 48),
+"GREY20" : (51, 51, 51),
+"GREY21" : (54, 54, 54),
+"GREY22" : (56, 56, 56),
+"GREY23" : (59, 59, 59),
+"GREY24" : (61, 61, 61),
+"GREY25" : (64, 64, 64),
+"GREY26" : (66, 66, 66),
+"GREY27" : (69, 69, 69),
+"GREY28" : (71, 71, 71),
+"GREY29" : (74, 74, 74),
+"GREY30" : (77, 77, 77),
+"GREY31" : (79, 79, 79),
+"GREY32" : (82, 82, 82),
+"GREY33" : (84, 84, 84),
+"GREY34" : (87, 87, 87),
+"GREY35" : (89, 89, 89),
+"GREY36" : (92, 92, 92),
+"GREY37" : (94, 94, 94),
+"GREY38" : (97, 97, 97),
+"GREY39" : (99, 99, 99),
+"GREY40" : (102, 102, 102),
+"GREY41" : (105, 105, 105),
+"GREY42" : (107, 107, 107),
+"GREY43" : (110, 110, 110),
+"GREY44" : (112, 112, 112),
+"GREY45" : (115, 115, 115),
+"GREY46" : (117, 117, 117),
+"GREY47" : (120, 120, 120),
+"GREY48" : (122, 122, 122),
+"GREY49" : (125, 125, 125),
+"GREY50" : (127, 127, 127),
+"GREY51" : (130, 130, 130),
+"GREY52" : (133, 133, 133),
+"GREY53" : (135, 135, 135),
+"GREY54" : (138, 138, 138),
+"GREY55" : (140, 140, 140),
+"GREY56" : (143, 143, 143),
 "GREY57" : (145, 145, 145),
 "GREY58" : (148, 148, 148),
 "GREY59" : (150, 150, 150),
@@ -90,6 +131,8 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "SLATE_GREY_4" : (108, 123, 139),
 "VERY_LIGHT_GREY" : (205, 205, 205),
 "WHITE" : (255, 255,255),
+ 
+ 
 "ALICE_BLUE" : (240, 248, 255),
 "AQUA" : (0, 255, 255),
 "AQUAMARINE" : (127, 255, 212),
@@ -102,25 +145,34 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "AZURE_2" : (224, 238, 238),
 "AZURE_3" : (193, 205, 205),
 "AZURE_4" : (131, 139, 139),
+"BLUE_1" : (0, 0, 255),
+"BLUE_2" : (0, 0, 238),
+"BLUE_3" : (0, 0, 205),
+"BLUE_4" : (0, 0, 139),
 "BLUE_VIOLET" : (138, 43, 226),
 "CADET_BLUE" : (95, 159, 159),
 "CADET_BLUE_1" : (1152, 245, 255),
 "CADET_BLUE_2" : (142, 229, 238),
 "CADET_BLUE_3" : (122, 197, 205),
-# "CYAN" : (0, 255, 255),
-# "CYAN_1" : (0, 255, 255),
-# "CYAN_2" : (0, 238, 238),
-# "CYAN_3" : (0, 205, 205),
-# "CYAN_4" : (0, 139, 139),
-# "DEEP_SKY_BLUE_1" : (0, 191, 255),
-# "DEEP_SKY_BLUE_2" : (0, 178, 238),
-# "DEEP_SKY_BLUE_3" : (0, 154, 205),
-# "DEEP_SKY_BLUE_4" : (0, 104, 139),
-# "DODGER_BLUE" : (30, 144, 255),
-# "DODGER_BLUE_1" : (30, 144, 255),
-# "DODGER_BLUE_2" : (28, 134, 238),
-# "DODGER_BLUE_3" : (24, 116, 205),
-# "DODGER_BLUE_4" : (16, 78, 139),
+"CADET_BLUE_4" : (83, 134, 139),
+"CORN_FLOWER_BLUE" : (66, 66, 111),
+"CYAN" : (0, 255, 255),
+"CYAN_1" : (0, 255, 255),
+"CYAN_2" : (0, 238, 238),
+"CYAN_3" : (0, 205, 205),
+"CYAN_4" : (0, 139, 139),
+"DARK_SLATE_BLUE" : (36, 24, 130),
+"DARK_TURQUOISE" : (112, 147, 219),
+"DEEP_SKY_BLUE" : (0, 191, 255),
+"DEEP_SKY_BLUE_1" : (0, 191, 255),
+"DEEP_SKY_BLUE_2" : (0, 178, 238),
+"DEEP_SKY_BLUE_3" : (0, 154, 205),
+"DEEP_SKY_BLUE_4" : (0, 104, 139),
+"DODGER_BLUE" : (30, 144, 255),
+"DODGER_BLUE_1" : (30, 144, 255),
+"DODGER_BLUE_2" : (28, 134, 238),
+"DODGER_BLUE_3" : (24, 116, 205),
+"DODGER_BLUE_4" : (16, 78, 139),
 "FREE_SPEECH_BLUE" : (65, 86, 197),
 "LIGHT_BLUE" : (173, 216, 230),
 "LIGHT_BLUE_1" : (191, 239, 255),
@@ -189,26 +241,26 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "TURQUOISE_4" : (0, 134,139),
  
  
-# "BAKERS_CHOCOLATE" : (92, 51, 23),
-# "BEIGE" : (245, 245, 220),
-# "BROWN" : (166, 42, 42),
-# "BROWN_1" : (255, 64, 64),
-# "BROWN_2" : (238, 59, 59),
-# "BROWN_3" : (205, 51, 51),
-# "BROWN_4" : (139, 35, 35),
-# "BURLYWOOD" : (222, 184, 135),
-# "BURLYWOOD_1" : (255, 211, 155),
-# "BURLYWOOD_2" : (238, 197, 145),
-# "BURLYWOOD_3" : (205, 170, 125),
-# "BURLYWOOD_4" : (139, 115, 85),
-# "CHOCOLATE" : (210, 105, 30),
-# "CHOCOLATE_1" : (255, 127, 36),
-# "CHOCOLATE_2" : (238, 118, 33),
-# "CHOCOLATE_3" : (205, 102, 29),
-# "CHOCOLATE_4" : (139, 69, 19),
-# "DARK_BROWN" : (92, 64, 51),
-# "DARK_TAN" : (151, 105, 79),
-# "DARK_WOOD" : (133, 94, 66),
+"BAKERS_CHOCOLATE" : (92, 51, 23),
+"BEIGE" : (245, 245, 220),
+"BROWN" : (166, 42, 42),
+"BROWN_1" : (255, 64, 64),
+"BROWN_2" : (238, 59, 59),
+"BROWN_3" : (205, 51, 51),
+"BROWN_4" : (139, 35, 35),
+"BURLYWOOD" : (222, 184, 135),
+"BURLYWOOD_1" : (255, 211, 155),
+"BURLYWOOD_2" : (238, 197, 145),
+"BURLYWOOD_3" : (205, 170, 125),
+"BURLYWOOD_4" : (139, 115, 85),
+"CHOCOLATE" : (210, 105, 30),
+"CHOCOLATE_1" : (255, 127, 36),
+"CHOCOLATE_2" : (238, 118, 33),
+"CHOCOLATE_3" : (205, 102, 29),
+"CHOCOLATE_4" : (139, 69, 19),
+"DARK_BROWN" : (92, 64, 51),
+"DARK_TAN" : (151, 105, 79),
+"DARK_WOOD" : (133, 94, 66),
 "LIGHT_WOOD" : (133, 99, 99),
 "MEDIUM_WOOD" : (166, 128, 100),
 "NEW_TAN" : (235, 199, 158),
@@ -234,19 +286,19 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "CHARTREUSE_2" : (118, 238, 0),
 "CHARTREUSE_3" : (102, 205, 0),
 "CHARTREUSE_4" : (69, 139, 0),
-# "DARK_GREEN" : (47, 79, 47),
-# "DARK_GREEN_COPPER" : (74, 118, 110),
-# "DARK_KHAKI" : (189, 183, 107),
-# "DARK_OLIVE_GREEN" : (85, 107, 47),
-# "DARK_OLIVE_GREEN_1" : (202, 255, 112),
-# "DARK_OLIVE_GREEN_2" : (188, 238, 104),
-# "DARK_OLIVE_GREEN_3" : (162, 205, 90),
-# "DARK_OLIVE_GREEN_4" : (110, 139, 61),
-# "DARK_SEA_GREEN" : (143, 188, 143),
-# "DARK_SEA_GREEN_1" : (193, 255, 193),
-# "DARK_SEA_GREEN_2" : (180, 238, 180),
-# "DARK_SEA_GREEN_3" : (155, 205, 155),
-# "DARK_SEA_GREEN_4" : (105, 139, 105),
+"DARK_GREEN" : (47, 79, 47),
+"DARK_GREEN_COPPER" : (74, 118, 110),
+"DARK_KHAKI" : (189, 183, 107),
+"DARK_OLIVE_GREEN" : (85, 107, 47),
+"DARK_OLIVE_GREEN_1" : (202, 255, 112),
+"DARK_OLIVE_GREEN_2" : (188, 238, 104),
+"DARK_OLIVE_GREEN_3" : (162, 205, 90),
+"DARK_OLIVE_GREEN_4" : (110, 139, 61),
+"DARK_SEA_GREEN" : (143, 188, 143),
+"DARK_SEA_GREEN_1" : (193, 255, 193),
+"DARK_SEA_GREEN_2" : (180, 238, 180),
+"DARK_SEA_GREEN_3" : (155, 205, 155),
+"DARK_SEA_GREEN_4" : (105, 139, 105),
 "FOREST_GREEN" : (34, 139, 34),
 "FREE_SPEECH_GREEN" : (9, 249, 17),
 "GREEN_1" : (0, 255, 0),
@@ -265,16 +317,16 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "MEDIUM_SEA_GREEN" : (60, 179, 113),
 "MEDIUM_SPRING_GREEN" : (0, 250, 154),
 "MINT_CREAM" : (245, 255, 250),
-# "OLIVE" : (128, 128, 0),
-# "OLIVE_DRAB" : (107, 142, 35),
-# "OLIVE_DRAB_1" : (192, 255, 62),
-# "OLIVE_DRAB_2" : (179, 238, 58),
-# "OLIVE_DRAB_3" : (154, 205, 50),
-# "OLIVE_DRAB_4" : (105, 139, 34),
-# "PALE_GREEN" : (152, 251, 152),
-# "PALE_GREEN_1" : (154, 255, 154),
-# "PALE_GREEN_2" : (144, 238, 144),
-# "PALE_GREEN_3" : (124, 205, 124),
+"OLIVE" : (128, 128, 0),
+"OLIVE_DRAB" : (107, 142, 35),
+"OLIVE_DRAB_1" : (192, 255, 62),
+"OLIVE_DRAB_2" : (179, 238, 58),
+"OLIVE_DRAB_3" : (154, 205, 50),
+"OLIVE_DRAB_4" : (105, 139, 34),
+"PALE_GREEN" : (152, 251, 152),
+"PALE_GREEN_1" : (154, 255, 154),
+"PALE_GREEN_2" : (144, 238, 144),
+"PALE_GREEN_3" : (124, 205, 124),
 "PALE_GREEN_4" : (84, 139, 84),
 "SEA_GREEN" : (46, 139, 87),
 "SEA_GREEN_1" : (84, 255, 159),
@@ -545,269 +597,224 @@ colors={"white":(255,255,255),"pink":(255,0,255),"blue":(0,0,255),"limeGreen":(1
 "QUARTZ" : (217, 217, 243),
 }
 clr=colors.get("limeGreen")
-#Message Lists
 messageMenu=['Instructions', 'Settings', 'Game 1', 'Game 2', 'Scoreboard', 'Exit']
 messageSettings=["Background Colors", "Screen Size", "Sound On/Off"]
-titleMain="Circle eats Square Menu"
+mainTitle="Circle eats Square Menu"
 #create dispay wind with any name y like
-clock = pygame.time.Clock()
+screen=pygame.display.set_mode((WIDTH,HEIGHT)) 
+pygame.display.set_caption("Tic Tac Toe")  #change the title of my window
+backgrnd=colors.get("pink")
 
-#boxes for menu
-Bx=WIDTH//3
-Button_menu=pygame.Rect(Bx, 150, WIDTH//4, 40)
-Button_instruct=pygame.Rect(Bx, 150, WIDTH//4, 40)
-Button_settings=pygame.Rect(Bx, 200, WIDTH//4, 40)
-Button_Game1=pygame.Rect(Bx, 250, WIDTH//4, 40)
-Button_Game2=pygame.Rect(Bx, 300, WIDTH//4, 40)
-Button_score=pygame.Rect(Bx, 350, WIDTH//4, 40)
-Button_exit=pygame.Rect(Bx, 400, WIDTH//4, 40)
-Button_colors=pygame.Rect(Bx, 150, WIDTH//3, 40)
-Button_size=pygame.Rect(Bx, 200, WIDTH//3, 40)
-Button_sound=pygame.Rect(Bx, 250, WIDTH//3, 40)
-#images
-bg=pygame.image.load('PygameFiles\images\\bgSmaller.jpg')
-char = pygame.image.load('PygameFiles\images\PixelArtTutorial.png')
-char = pygame.transform.scale(char, (50, 50))
-# screen.blit(bg, (0,0))
-# pygame.display.update()
-# pygame.time.delay(5000)
+#game Variable
+player=1
+markers=[]
+lineWidth=10
+Game=True
+MxMy=(0,0)
+print(markers)  
+cirClr=colors.get("blue")
+xClr=colors.get("BLACK")
+def zero_Array(): 
+    for x in range(3):
+        row= [0] *3
+        markers.append(row)
 
 
-#square Var
-hb=50
-wb=50
-xb=100
-yb=300
+def draw_grid():
+    lineClr=colors.get("white")
+    for x in range(1,3):
+        pygame.draw.line(screen,lineClr,(0,HEIGHT//3*x),(WIDTH,HEIGHT//3*x),lineWidth)  #Hztal line
+        pygame.draw.line(screen,lineClr,(WIDTH//3*x, 0),(WIDTH//3*x,HEIGHT),lineWidth)  #Vert line
+    pygame.time.delay(100)
 
-charx = xb
-chary = yb
+def draw_Markers():
+    xValue=0
+    for x in markers:   # getting a rw
+        yValue=0
+        for y in x:  #each elem fthe rw
+            if y ==1:
+                pygame.draw.line(screen,xClr,(xValue * WIDTH//3 + 15, yValue * HEIGHT//3 + 15), (xValue * WIDTH//3 + WIDTH//3-15, yValue * WIDTH//3 + WIDTH//3-15),lineWidth)
+                pygame.draw.line(screen, xClr,(xValue*WIDTH//3 +WIDTH//3-15, yValue*HEIGHT//3+15),(xValue *WIDTH//3+15,yValue*HEIGHT//3+HEIGHT//3-15),lineWidth)
+            if y==-1:
+                pygame.draw.circle(screen,cirClr,(xValue*WIDTH//3+WIDTH//6,yValue*HEIGHT//3 +HEIGHT//6),WIDTH//6-15, lineWidth)
+            yValue +=1
+        xValue +=1
+    pygame.display.update() \
 
-cx=350
-cy=350
-rad=25
-speed=2
-ibox = rad*math.sqrt(2)
-xig = cx-(ibox/2)
-yig = cy-(ibox/2)
-
-#mouse variables
-mx = 0
-my = 0
-
-square=pygame.Rect(xb,yb,wb,hb)# create the object to draw
-insSquare=pygame.Rect(xig,yig,ibox,ibox)
-squareClr=colors.get("pink")
-#keep running create a lp
-mountainSquare=pygame.Rect(250,320,180,250)
-circleClr=colors.get("blue")
-backgrnd=colors.get("limeGreen")
-run = True
-Game = False
-
-def Menu(Title, message,MENU):
-    
-    textTitle = TITLE_FONT.render(Title, 1, colors.get("blue"))
-    screen.fill(colors.get('white'))
-    xd = WIDTH//2 - (textTitle.get_width()//2)
-    screen.blit(textTitle, (xd, 50))
-    yMenu=150
-    clslist=list(colors.keys())
-    for item in message:
-        colorRand=random.choice(clslist)
-        if colorRand == "blue":
-            colorRand=random.choice(clslist)
-
-        Button_menu=pygame.Rect(Bx, yMenu, WIDTH//3, 40)
-        text=MENU_FONT.render(item, 1, colors.get("blue"))
-        pygame.draw.rect(screen, colors.get(colorRand), Button_menu)
-        screen.blit(text, (Bx, yMenu))
-        pygame.display.update()
-        pygame.time.delay(50)
-        yMenu += 50
-    
-    while MENU:
-        for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-                textTitle = TITLE_FONT.render("Bye-Bye", 1, colors.get("blue"))
-                screen.fill(colors.get('white'))
-                xd = WIDTH//2 - (textTitle.get_width()//2)
-                yd = HEIGHT//2- 40
-                screen.blit(textTitle, (xd, yd))
-                pygame.display.update()
-                pygame.time.delay(500)
-                pygame.quit()
-                sys.exit()
-
-                
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                mousePos = pygame.mouse.get_pos()
-                mx = mousePos[0]
-                my = mousePos[1]
-                print(mx,my)
-                if Button_instruct.collidepoint((mx, my)):
-                    readFile("Instructions","pygameFiles\inst.txt")
-                if Button_settings.collidepoint((mx, my)):
-                    settings()
-                if Button_Game1.collidepoint((mx,my)):
-                    Game_1()
-                if Button_Game2.collidepoint((mx,my)):
-                    Game_1()
-                if Button_score.collidepoint((mx,my)):
-                    readFile("ScoreBoard", "scre.txt")
-                if Button_exit.collidepoint((mx,my)):
-                    textTitle = TITLE_FONT.render("Bye-Bye", 1, colors.get("blue"))
-                    name="Maria"
-                    sce=374
-                    date=datetime.datetime.now()
-                    scrLine=str(sce)+"      "+name + "      "+date.strftime("%m-%d-%Y")+ "\n"
-                    myFile = open("scre.txt", 'a')
-                    myFile.write(scrLine)
-                    myFile.close()
-                    screen.fill(colors.get('white'))
-                    xd = WIDTH//2 - (textTitle.get_width()//2)
-                    yd = HEIGHT//2- 40
-                    screen.blit(textTitle, (xd, yd))
-                    pygame.display.update()
-                    pygame.time.delay(500)
-                    pygame.quit()
-                    sys.exit()
-                    
-           
-def readFile(titleF,fileN):
-    
-    #fills screen with white
-    screen.fill(colors.get("white"))
-    #rendering text objects
-    Title = TITLE_FONT.render(titleF, 1, colors.get("blue"))
+def Xwinnerult():
+    screen.fill("YELLOW")
+    Title = TITLE_FONT.render(("PLAYER 1 IS THE CHAMPION"), 1, colors.get("white"))
     xd = WIDTH//2 - (Title.get_width()//2)
-    screen.blit(Title, (xd, 50))
-    text1 = MENU_FONT.render("Yes", 1, colors.get("blue"))
-    text2 = MENU_FONT.render("No", 1, colors.get("blue"))
-
-    #creating button options
-    Button_1 = pygame.Rect(200, 400, 100, 50)
-    Button_2 = pygame.Rect(400, 400, 100, 50)
-    # pygame.draw.rect(screen, colors.get("limeGreen"), Button_1)
-    # pygame.draw.rect(screen, colors.get("limeGreen"), Button_2)
-
-    #ReAd files Instructions and scre
-    myFile = open(fileN, "r")
-    content = myFile.readlines()
-    myFile.close()
-    #var to controll change of line
-    yi = 150
-    for line in content:
-        Item = MENU_FONT.render(line[0:-1], 1, colors.get("blue"))
-        screen.blit(Item, (40, yi))
-        pygame.display.update()
-        pygame.time.delay(50)
-        yi+= 40
-
-    #renderig fonts to the screen
-
-    screen.blit(text1, (225, 410))
-    screen.blit(text2, (425, 410))
-
-    pygame.display.update()
-    while True:
-        for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-                Menu(titleMain,messageMenu, True)
-                print("You quit")
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                mousePos = pygame.mouse.get_pos()
-                mx = mousePos[0]
-                my = mousePos[1]
-                if Button_1.collidepoint((mx, my)):
-                    Menu(titleMain,messageMenu, True) 
-                # if Button_2.collidepoint((mx, my)):
-                #     return False
-
-def settings():
-    Menu("Settings",messageSettings, False)
-    while True:
-        for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-                Menu(titleMain,messageMenu,True)
-                print("You quit")
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                mousePos = pygame.mouse.get_pos()
-                mx = mousePos[0]
-                my = mousePos[1]
-                if Button_colors.collidepoint((mx, my)):
-                    print("Change colors")
-                if Button_size.collidepoint((mx, my)):
-                    print("Change size")
-                if Button_sound.collidepoint((mx, my)):
-                    print("Change sounds")
-                # if Button_2.collidepoint((mx, my)):
-                #     return False
+    screen.blit(Title, (xd, 50))\
     
+    pygame.time.delay(1000)
+    pygame.display.update()
 
-def Game_1():
-    global mx,my, insSquare, charx,chary, cx,cy, rad
-    while run:
-        # screen.fill(backgrnd)
-        for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-                Menu(titleMain,messageMenu,True)
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                mousePos = pygame.mouse.get_pos()
-                mx = mousePos[0]
-                my = mousePos[1]
-        screen.blit(bg, (0,0))
-        keys= pygame.key.get_pressed() #this is a list
-        #mve square
-        if keys[pygame.K_RIGHT] and square.x < WIDTH -(wb):
-            square.x += speed
-            charx += speed
-        if keys[pygame.K_LEFT] and  square.x > speed:
-            square.x -= speed
-            charx -= speed
-        if keys[pygame.K_UP] and square.y >speed:   #means clser t 0
-            square.y -= speed
-            chary -= speed
-        if keys[pygame.K_DOWN] and square.y <HEIGHT -hb:  #means clser t max value HEIGHT
-            square.y += speed
-            chary += speed
-            #mve Circle
-        if keys[pygame.K_d] and cx < WIDTH -(rad):
-            cx += speed
-            insSquare.x += speed
-        if keys[pygame.K_a] and  cx > (speed+rad):
-            cx -= speed
-            insSquare.x -= speed
-        if keys[pygame.K_w] and cy >(speed+rad):   #means clser t 0
-            cy -= speed
-            insSquare.y -= speed
-        if keys[pygame.K_s] and cy <HEIGHT -(rad):  #means clser t max value HEIGHT
-            cy += speed
-            insSquare.y += speed
+def Owinnerult():
+    screen.fill("YELLOW")
+    Title = TITLE_FONT.render(("PLAYER 2 IS THE CHAMPION"), 1, colors.get("white"))
+    xd = WIDTH//2 - (Title.get_width()//2)
+    screen.blit(Title, (xd, 50))\
+    
+    pygame.time.delay(1000)
+    pygame.display.update()
 
-        if square.colliderect(insSquare):
-            print("BOOM")
-            rad+=1
-            cx=random.randint(rad, WIDTH-rad)
-            cy=random.randint(rad, HEIGHT-rad)
-            ibox = rad*math.sqrt(2)
-            xig = cx-(ibox/2)
-            yig = cy-(ibox/2)
-            insSquare=pygame.Rect(xig,yig,ibox,ibox)
+def Xwinner():
+    print("PLAYER 1 WINS")
+    screen.fill("red")
+    Title = TITLE_FONT.render(("PLAYER 1 WINS"), 1, colors.get("white"))
+    xd = WIDTH//2 - (Title.get_width()//2)
+    screen.blit(Title, (xd, 50))\
+    
+    pygame.time.delay(3000)
+    pygame.display.update()
+
+    if Xcount == 3:
+        Xwinnerult()
+        Xcount = 0
+        Ocount = 0
+
+    else:
+        print("How do I erase the board?")
+        gameEnd()
+
+def Owinner():
+    print("PLAYER 2 WINS")
+    screen.fill("red")
+    Title = TITLE_FONT.render(("PLAYER 2 WINS"), 1, colors.get("white"))
+    xd = WIDTH//2 - (Title.get_width()//2)
+    screen.blit(Title, (xd, 50))\
+
+    pygame.time.delay(3000)
+    pygame.display.update()
+
+    if Ocount == 3:
+        Owinnerult()
+        Xcount = 0
+        Ocount = 0
+    else:
+        print("How do I erase the board?")
+        gameEnd()
+
+Xcount=0
+Ocount=0
+
+def checkWinner():
+    global Xcount, Ocount
+    if markers [0][0] + markers [0][1] + markers [0][2] == 3:
+        os.system('cls')
+        Xcount +=1
+        Xwinner()
+    if markers [1][0] + markers [1][1] + markers [1][2] == 3:
+        os.system('cls') 
+        Xcount +=1 
+        Xwinner()
+         
+    if markers [2][0] + markers [2][1] + markers [2][2] == 3:
+         os.system('cls')
+         Xcount +=1
+         Xwinner()
+         
+    if markers [0][0] + markers [1][0] + markers [2][0] == 3:
+         os.system('cls')
+         Xcount +=1
+         Xwinner()
+         
+    if markers [0][1] + markers [1][1] + markers [2][1] == 3:
+         os.system('cls')
+         Xcount +=1
+         Xwinner()
+         
+    if markers [0][2] + markers [1][2] + markers [2][2] == 3:
+         os.system('cls')
+         Xcount +=1
+         Xwinner()
+         
+    if markers [0][0] + markers [1][1] + markers [2][2] == 3:
+         os.system('cls')
+         Xcount +=1
+         Xwinner()
+         
+    if markers [2][0] + markers [1][1] + markers [0][2] == 3:
+         os.system('cls')
+         Ocount +=1
+         Owinner()
+         
+    if markers [0][0] + markers [0][1] + markers [0][2] == -3:
+        os.system('cls')
+        Ocount +=1
+        Owinner()
         
-        if square.colliderect(mountainSquare):
-            square.x=10
-            square.y=10
-            charx=10
-            chary=10
-        #rect(surface, color, rect) -> Rect
-        pygame.draw.rect(screen, squareClr,square)
-        screen.blit(char, (charx, chary))
-        #circle(surface, color, center, radius)
-        pygame.draw.circle(screen, circleClr, (cx,cy), rad)
-        pygame.draw.rect(screen, squareClr, insSquare)
+    if markers [1][0] + markers [1][1] + markers [1][2] == -3:
+         os.system('cls')
+         Ocount +=1
+         Owinner()
+         
+    if markers [2][0] + markers [2][1] + markers [2][2] == -3:
+         os.system('cls')
+         Ocount +=1
+         Owinner()
+         
+    if markers [0][0] + markers [1][0] + markers [2][0] == -3:
+         os.system('cls')
+         Ocount +=1
+         Owinner()
+         
+    if markers [0][1] + markers [1][1] + markers [2][1] == -3:
+         os.system('cls')
+         Ocount +=1
+         Owinner()
+         
+    if markers [0][2] + markers [1][2] + markers [2][2] == -3:
+         os.system('cls')
+         Ocount +=1
+         Owinner()
+         
+    if markers [0][0] + markers [1][1] + markers [2][2] == -3:
+         os.system('cls')
+         Ocount +=1
+         Owinner()
+         
+    if markers [2][0] + markers [1][1] + markers [0][2] == -3:
+        os.system('cls')
+        Ocount +=1
+        Owinner()
+    
+    # CAT GAME??????????????????????????
 
-        #pygame.draw.rect(screen, colors.get('white'), mountainSquare,)
-        pygame.display.update()
-        clock.tick(60)
 
-Menu(titleMain,messageMenu, True)
+    
+  
+
+
+def gameEnd():
+    zero_Array()
+    draw_Markers()
+    # HOW DO I GET THE GAME TO RESTART????????????????????????????????????????????
+
+zero_Array()
+while Game:
+    screen.fill(backgrnd)
+    draw_grid()
+    draw_Markers()
+    for event in pygame.event.get():
+        if event.type==pygame.QUIT:
+            #Menu(mainTitle,messageMenu)
+            pygame.quit()
+            sys.exit()
+            print("You quit")
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            MxMy = pygame.mouse.get_pos()
+            cellx=MxMy[0]//(WIDTH//3)
+            celly=MxMy[1]//(HEIGHT//3)
+            print(cellx, celly)
+            if markers[cellx][celly]==0:
+                markers[cellx][celly]=player
+                player *=-1
+                checkWinner()
+                
+            
+            
+            
+    pygame.display.update() 
+    pygame.time.delay(100)
